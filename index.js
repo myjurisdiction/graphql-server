@@ -45,14 +45,32 @@ const resolvers = {
     },
   },
 
-  Review : {
-    game : function (parent) {
-        return db.games.find((g) => g.id === parent.id)
+  Review: {
+    game: function (parent) {
+      return db.games.find((g) => g.id === parent.id);
     },
-    author : function (parent) {
-        return db.authors.find((a) => a.id === parent.id)
-    }
-  }
+    author: function (parent) {
+      return db.authors.find((a) => a.id === parent.id);
+    },
+  },
+
+  Mutation: {
+    deleteGame: function (_, args) {
+      db.games = db.games.filter((game) => game.id !== args.id);
+      return db.games;
+    },
+
+    addGame: function (_, args) {
+      const { title, platform } = args.game;
+      const newGameObject = {
+        title,
+        platform,
+        id: Math.floor(Math.random() * 10000).toString(),
+      };
+      db.games.push(newGameObject);
+      return newGameObject;
+    },
+  },
 };
 
 const server = new ApolloServer({

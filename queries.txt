@@ -17,6 +17,55 @@ query ReviewQuery ($id : ID!) {
     }
 }
 
+// Getting resource by ID but having multiple nested resources
+query ReviewQuery ($id : ID!) {
+    review (id : $id) {
+      id,
+      content,
+      game {
+        id,
+        title,
+        platform,
+        reviews {
+          id,
+          content
+        }
+      },
+    }
+}
+
+// Mutation
+
+//deleteGame
+
+mutation DeleteMutation ($deleteGameId: ID!) {
+  deleteGame(id: $deleteGameId) {
+    id,
+    title,
+    platform
+  }
+} 
+
+// in variables : { "deleteGameId" : "<id>"}
+
+// add Game
+
+mutation AddGameMutation ($game: AddGameInput!) {
+  addGame(game: $game) {
+      id,
+      title,
+      platform
+  }
+}
+
+// in variables
+{
+  "game": {
+    "title" : "Road Rash",
+    "platform" : ["Monitor", "PC"]
+  }
+}
+
 
 
 
