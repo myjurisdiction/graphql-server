@@ -66,6 +66,21 @@ mutation AddGameMutation ($game: AddGameInput!) {
   }
 }
 
+// update Game
+mutation UpdateGame ($game: UpdateGameInput!, $updateGameId: ID!) {
+  updateGame(game: $game, id: $updateGameId)
+}
+
+
+
+// variables
+{ 
+   "game": {
+    "platform" : ["Some new Platform"],
+    "title" : "I am awesome"
+   },
+    "updateGameId": "1"
+}
 
 
 

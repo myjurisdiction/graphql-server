@@ -70,6 +70,21 @@ const resolvers = {
       db.games.push(newGameObject);
       return newGameObject;
     },
+
+    updateGame: function (_, args) {
+      try {
+        db.games = db.games.map((g) => {
+          if (g.id === args.id) {
+            g = { ...g, ...args.game };
+          }
+          return g;
+        });
+
+        return 'success'
+      } catch (error) {
+        return 'Update Failed'
+      }
+    },
   },
 };
 
