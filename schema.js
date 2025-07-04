@@ -21,7 +21,7 @@ type Author {
     reviews : [Review!]
 }
 
-# entry point to different types
+# entry point to different data sources
 type Query {
     reviews : [Review]
     games : [Game]

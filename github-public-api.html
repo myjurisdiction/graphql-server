@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Query Github public API</title>
+  </head>
+  <body>
+    <h1>Query Github</h1>
+  </body>
+  <script>
+    const token = '' // GET YOUR OWN TOKEN
+
+    const graphQlEndpoint = "https://api.github.com/graphql";
+
+    const q = `query {
+    repository (name : "freecodecamp", owner : "freecodecamp") {
+        name
+        forkCount,
+    }
+    }`;
+
+    function makeQuery() {
+      fetch(graphQlEndpoint, {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify({ query: q }),
+      })
+        .then((res) => res.json())
+        .then(console.log);
+    }
+
+    setTimeout(makeQuery, 2000);
+  </script>
+</html>
